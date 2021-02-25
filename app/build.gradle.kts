@@ -71,8 +71,8 @@ dependencies {
 //    implementation(project(":summer"))
 //    implementation(project(":summer-arch-lifecycle"))
 
-    kapt(project(":aprocessor"))
-    implementation(project(":annotations"))
+    implementation(project(":what-happened-runtime"))
+    kapt(project(":what-happened-compiler"))
 
     implementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
