@@ -2,7 +2,7 @@ package io.adev.whatHappened
 
 import kotlin.reflect.KClass
 
-data class InputStep(
+data class HappenedEvent(
     val type: Type,
     val viewModelType: KClass<*>,
     val viewType: KClass<*>? = null,
@@ -25,24 +25,24 @@ data class InputStep(
 
     companion object {
 
-        fun init(viewModelType: KClass<*>): InputStep {
-            return InputStep(type = Type.Init, viewModelType)
+        fun init(viewModelType: KClass<*>): HappenedEvent {
+            return HappenedEvent(type = Type.Init, viewModelType)
         }
 
-        fun attach(viewModelType: KClass<*>, viewType: KClass<*>): InputStep {
-            return InputStep(type = Type.Attach, viewModelType, viewType)
+        fun attach(viewModelType: KClass<*>, viewType: KClass<*>): HappenedEvent {
+            return HappenedEvent(type = Type.Attach, viewModelType, viewType)
         }
 
-        fun detach(viewModelType: KClass<*>): InputStep {
-            return InputStep(type = Type.Detach, viewModelType)
+        fun detach(viewModelType: KClass<*>): HappenedEvent {
+            return HappenedEvent(type = Type.Detach, viewModelType)
         }
 
-        fun interact(
+        fun viewInteract(
             viewModelType: KClass<*>,
             methodName: String,
             arguments: List<Argument<*>>,
-        ): InputStep {
-            return InputStep(type = Type.Interact, viewModelType, viewType = null, methodName, arguments)
+        ): HappenedEvent {
+            return HappenedEvent(type = Type.Interact, viewModelType, viewType = null, methodName, arguments)
         }
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import io.adev.whatHappened.InputStep
+import io.adev.whatHappened.HappenedEvent
 import io.adev.whatHappened.RecordingHolder
 import summer.DidSetMixin
 import summer.example.ServiceLocator
@@ -41,7 +41,7 @@ abstract class BaseFragment : Fragment(), NavigationView {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBindingDelegate?.clearBinding()
-        ServiceLocator.stepsRecorder.addStep(InputStep.detach(viewModelClass))
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.detach(viewModelClass))
     }
 
     lateinit var viewClass: KClass<*>
@@ -56,8 +56,8 @@ abstract class BaseFragment : Fragment(), NavigationView {
         viewModel.bindView(fragment.viewLifecycleOwner, provideView)
         this.viewClass = TView::class
         this.viewModelClass = viewModelClass
-        ServiceLocator.stepsRecorder.addStep(InputStep.attach(viewModelClass, viewClass))
-        return RecordingHolder(viewModel, ServiceLocator.stepsRecorder)
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.attach(viewModelClass, viewClass))
+        return RecordingHolder(viewModel, ServiceLocator.happenedEventRecorder)
     }
 
     override val navigate: (navigation: (AppNavigator) -> Unit) -> Unit = { navigate ->

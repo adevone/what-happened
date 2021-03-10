@@ -10,7 +10,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val crashLogFile = File(filesDir, "today.log")
+        val crashLogFile = File(filesDir, "what-happened.log")
         if (crashLogFile.exists()) {
             val crashText = crashLogFile.readText()
             Log.e("ERROR", crashText)
@@ -18,7 +18,7 @@ class App : Application() {
         }
 
         Thread.currentThread().setUncaughtExceptionHandler { _, _ ->
-            val stepsJson = ServiceLocator.stepsRecorder.dump()
+            val stepsJson = ServiceLocator.happenedEventRecorder.dump()
             if (!crashLogFile.exists()) {
                 crashLogFile.createNewFile()
             }

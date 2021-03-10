@@ -1,17 +1,17 @@
 package summer.example.recording
 
-import io.adev.whatHappened.InputStep
-import io.adev.whatHappened.StepsRecorder
+import io.adev.whatHappened.HappenedEvent
+import io.adev.whatHappened.HappenedEventRecorder
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 
-class SerializationStepsRecorder(
+class SerializationHappenedEventRecorder(
     private val json: Json,
-) : StepsRecorder {
+) : HappenedEventRecorder {
 
-    private val steps = mutableListOf<InputStep>()
+    private val steps = mutableListOf<HappenedEvent>()
 
-    override fun addStep(step: InputStep) {
+    override fun append(step: HappenedEvent) {
         steps.add(step)
     }
 

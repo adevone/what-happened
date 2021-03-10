@@ -12,10 +12,10 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
 import io.adev.whatHappened.Hide
-import io.adev.whatHappened.InputStep
+import io.adev.whatHappened.HappenedEvent
 import io.adev.whatHappened.Record
 import io.adev.whatHappened.RecordingHolder
-import io.adev.whatHappened.StepsRecorder
+import io.adev.whatHappened.HappenedEventRecorder
 import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -77,7 +77,7 @@ class AnnotationProcessor : AbstractProcessor() {
 
         val fileName = "${className}Recorder"
         val fileBuilder = FileSpec.builder(pack, fileName)
-            .addImport(InputStep::class.java.`package`.name, InputStep::class.simpleName!!)
+            .addImport(HappenedEvent::class.java.`package`.name, HappenedEvent::class.simpleName!!)
             .indent("    ")
 
         val classBuilder = TypeSpec.classBuilder(fileName)
@@ -85,7 +85,7 @@ class AnnotationProcessor : AbstractProcessor() {
         classBuilder.primaryConstructor(
             FunSpec.constructorBuilder()
                 .addParameter("recording", element.asType().asTypeName())
-                .addParameter("stepsRecorder", StepsRecorder::class.asTypeName())
+                .addParameter("happenedEventRecorder", HappenedEventRecorder::class.asTypeName())
                 .build()
         )
 
@@ -96,8 +96,8 @@ class AnnotationProcessor : AbstractProcessor() {
         )
 
         classBuilder.addProperty(
-            PropertySpec.builder("stepsRecorder", StepsRecorder::class.asTypeName(), KModifier.PRIVATE)
-                .initializer("stepsRecorder")
+            PropertySpec.builder("happenedEventRecorder", HappenedEventRecorder::class.asTypeName(), KModifier.PRIVATE)
+                .initializer("happenedEventRecorder")
                 .build()
         )
 
@@ -119,7 +119,7 @@ class AnnotationProcessor : AbstractProcessor() {
 
                 val formattedArgs = enclosed.parameters.joinToString(separator = ",\n") { parameter ->
                     """
-            InputStep.Argument(
+            HappenedEvent.Argument(
                 name = "${parameter.simpleName}",
                 value = ${parameter.simpleName},
                 clazz = ${parameter.asType().asTypeName().javaToKotlinType()}::class,
@@ -127,8 +127,8 @@ class AnnotationProcessor : AbstractProcessor() {
             )""".trimStart { it == '\n' }
                 }
                 functionBuilder.addCode("""
-stepsRecorder.addStep(
-    InputStep.interact(
+happenedEventRecorder.append(
+    HappenedEvent.viewInteract(
         viewModelType = ${element.asType().asTypeName()}::class,
         methodName = "${enclosed.simpleName}",
         arguments = listOf(
@@ -153,7 +153,7 @@ $formattedArgs
                         .parameterizedBy(element.asType().asTypeName())
                 )
                 .returns(ClassName.bestGuess("$pack.$fileName"))
-                .addCode("return $fileName(this.recording, this.stepsRecorder)")
+                .addCode("return $fileName(this.recording, this.happenedEventRecorder)")
                 .build()
         )
 

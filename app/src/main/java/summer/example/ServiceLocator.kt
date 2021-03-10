@@ -15,7 +15,7 @@ import summer.example.presentation.BasketViewModel
 import summer.example.presentation.FrameworkDetailsViewModel
 import summer.example.presentation.FrameworksViewModel
 import summer.example.presentation.MainViewModel
-import summer.example.recording.SerializationStepsRecorder
+import summer.example.recording.SerializationHappenedEventRecorder
 
 object ServiceLocator {
 
@@ -24,7 +24,7 @@ object ServiceLocator {
         ignoreUnknownKeys = true
     }
 
-    val stepsRecorder = SerializationStepsRecorder(json)
+    val happenedEventRecorder = SerializationHappenedEventRecorder(json)
 
     private val basketController: BasketController = CoroutinesBasketController()
 

@@ -34,12 +34,12 @@ fun reproduce1(
     frameworksViewModel.onIncreaseClick(
         item = decode("""{"framework":{"name":"Spring","version":"5.0"},"quantity":1}""")
     )
-    frameworksViewModel.onIncreaseClick(
+    frameworksViewModel.onDecreaseClick(
         item = decode("""{"framework":{"name":"Summer","version":"0.8.17"},"quantity":0}""")
     )
     callOnItemClickOfFrameworksViewModel(
         frameworksViewModel,
-        """{"framework":{"name":"Summer","version":"0.8.17"},"quantity":1}"""
+        """{"framework":{"name":"Summer","version":"0.8.17"},"quantity":0}"""
     )
     frameworkDetailsViewModel = createFrameworkDetailsViewModel()
     frameworkDetailsViewModel.getView = {

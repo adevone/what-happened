@@ -1,6 +1,6 @@
 package summer.example.recording
 
-import io.adev.whatHappened.InputStep
+import io.adev.whatHappened.HappenedEvent
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -31,7 +31,7 @@ data class SerializableInputStep(
     )
 }
 
-fun InputStep.toSerializable(json: Json): SerializableInputStep {
+fun HappenedEvent.toSerializable(json: Json): SerializableInputStep {
     return SerializableInputStep(
         type = this.type.toSerializable(),
         viewModelType = this.viewModelType.qualifiedName!!,
@@ -43,16 +43,16 @@ fun InputStep.toSerializable(json: Json): SerializableInputStep {
     )
 }
 
-private fun InputStep.Type.toSerializable(): SerializableInputStep.Type {
+private fun HappenedEvent.Type.toSerializable(): SerializableInputStep.Type {
     return when (this) {
-        InputStep.Type.Init -> SerializableInputStep.Type.Init
-        InputStep.Type.Attach -> SerializableInputStep.Type.Attach
-        InputStep.Type.Detach -> SerializableInputStep.Type.Detach
-        InputStep.Type.Interact -> SerializableInputStep.Type.Interact
+        HappenedEvent.Type.Init -> SerializableInputStep.Type.Init
+        HappenedEvent.Type.Attach -> SerializableInputStep.Type.Attach
+        HappenedEvent.Type.Detach -> SerializableInputStep.Type.Detach
+        HappenedEvent.Type.Interact -> SerializableInputStep.Type.Interact
     }
 }
 
-private fun InputStep.Argument<*>.toSerializable(json: Json): SerializableInputStep.Argument {
+private fun HappenedEvent.Argument<*>.toSerializable(json: Json): SerializableInputStep.Argument {
     val serializer = serializer(this.clazz.createType())
     return SerializableInputStep.Argument(
         name = this.name,

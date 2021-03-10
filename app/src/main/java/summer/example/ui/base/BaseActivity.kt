@@ -3,7 +3,7 @@ package summer.example.ui.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import io.adev.whatHappened.InputStep
+import io.adev.whatHappened.HappenedEvent
 import io.adev.whatHappened.RecordingHolder
 import summer.DidSetMixin
 import summer.example.ServiceLocator
@@ -25,13 +25,13 @@ abstract class BaseActivity : AppCompatActivity() {
         val provider = ViewModelProvider(activity, ViewModelFactory())
         val viewModel = provider[viewModelClass.java]
         viewModel.bindView(activity, provideView)
-        ServiceLocator.stepsRecorder.addStep(InputStep.attach(viewModelClass, viewClass))
-        return RecordingHolder(viewModel, ServiceLocator.stepsRecorder)
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.attach(viewModelClass, viewClass))
+        return RecordingHolder(viewModel, ServiceLocator.happenedEventRecorder)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        ServiceLocator.stepsRecorder.addStep(InputStep.detach(viewModelClass))
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.detach(viewModelClass))
     }
 
     companion object : DidSetMixin

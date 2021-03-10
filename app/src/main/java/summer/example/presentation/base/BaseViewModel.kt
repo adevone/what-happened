@@ -1,6 +1,6 @@
 package summer.example.presentation.base
 
-import io.adev.whatHappened.InputStep
+import io.adev.whatHappened.HappenedEvent
 import summer.example.ServiceLocator
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
@@ -10,14 +10,14 @@ abstract class BaseViewModel<TView>(
 ) : CoroutinesViewModel<TView>(uiContext) {
 
     init {
-        ServiceLocator.stepsRecorder.addStep(InputStep.init(this::class))
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.init(this::class))
     }
 
     fun attached(clazz: KClass<*>, viewClass: KClass<*>) {
-        ServiceLocator.stepsRecorder.addStep(InputStep.attach(clazz, viewClass))
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.attach(clazz, viewClass))
     }
 
     fun detached(clazz: KClass<*>) {
-        ServiceLocator.stepsRecorder.addStep(InputStep.detach(clazz))
+        ServiceLocator.happenedEventRecorder.append(HappenedEvent.detach(clazz))
     }
 }
