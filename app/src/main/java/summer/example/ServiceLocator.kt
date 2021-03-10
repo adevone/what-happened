@@ -15,7 +15,7 @@ import summer.example.presentation.BasketViewModel
 import summer.example.presentation.FrameworkDetailsViewModel
 import summer.example.presentation.FrameworksViewModel
 import summer.example.presentation.MainViewModel
-import summer.example.recording.SerializationHappenedEventRecorder
+import io.adev.whatHappened.serializable.SerializationHappenedEventRecorder
 
 object ServiceLocator {
 

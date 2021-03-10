@@ -1,4 +1,4 @@
-package summer.example.recording
+package io.adev.whatHappened.serializable
 
 import io.adev.whatHappened.HappenedEvent
 import io.adev.whatHappened.HappenedEventRecorder
@@ -16,7 +16,7 @@ class SerializationHappenedEventRecorder(
     }
 
     fun dump(): String {
-        val serializableSteps = steps.map { it.toSerializable(Json) }
+        val serializableSteps = steps.map { it.toSerializable(json) }
         return json.encodeToString(
             ListSerializer(SerializableInputStep.serializer()),
             serializableSteps

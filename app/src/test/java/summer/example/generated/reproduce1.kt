@@ -1,6 +1,6 @@
 package summer.example.generated
 
-import summer.example.recording.decode
+import io.adev.whatHappened.serializable.decode
 
 fun reproduce1(
     createMainViewModel: () -> summer.example.presentation.MainViewModel,
@@ -34,12 +34,15 @@ fun reproduce1(
     frameworksViewModel.onIncreaseClick(
         item = decode("""{"framework":{"name":"Spring","version":"5.0"},"quantity":1}""")
     )
-    frameworksViewModel.onDecreaseClick(
+    frameworksViewModel.onIncreaseClick(
         item = decode("""{"framework":{"name":"Summer","version":"0.8.17"},"quantity":0}""")
+    )
+    frameworksViewModel.onDecreaseClick(
+        item = decode("""{"framework":{"name":"Summer","version":"0.8.17"},"quantity":1}""")
     )
     callOnItemClickOfFrameworksViewModel(
         frameworksViewModel,
-        """{"framework":{"name":"Summer","version":"0.8.17"},"quantity":0}"""
+        """{"framework":{"name":"Spring","version":"5.0"},"quantity":2}"""
     )
     frameworkDetailsViewModel = createFrameworkDetailsViewModel()
     frameworkDetailsViewModel.getView = {
@@ -47,7 +50,7 @@ fun reproduce1(
     }
     frameworkDetailsViewModel.viewCreated()
     frameworkDetailsViewModel.init(
-        initialFramework = decode("""{"name":"Summer","version":"0.8.17"}""")
+        initialFramework = decode("""{"name":"Spring","version":"5.0"}""")
     )
     frameworksViewModel.getView = { null }
 

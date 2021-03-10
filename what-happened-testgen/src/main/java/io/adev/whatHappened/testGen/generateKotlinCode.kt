@@ -1,8 +1,8 @@
-package summer.example
+package io.adev.whatHappened.testGen
 
+import io.adev.whatHappened.serializable.SerializableInputStep
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import summer.example.recording.SerializableInputStep
 import java.util.*
 
 fun generateKotlinCode(
@@ -19,7 +19,7 @@ fun generateKotlinCode(
 
     append("package $pkg\n\n")
 
-    append("import summer.example.recording.decode\n\n")
+    append("import io.adev.whatHappened.serializable.decode\n\n")
 
     val viewModelSteps = steps.associateBy { it.viewModelType }.values
     val formattedModels = viewModelSteps.map { step ->
@@ -137,7 +137,7 @@ fun SerializableInputStep.viewProviderName(): String {
 }
 
 fun SerializableInputStep.callMaskedMethodName(): String {
-    return "call${methodName.capitalize()}Of${simpleName(viewModelType)}"
+    return "call${methodName.capitalize(Locale.getDefault())}Of${simpleName(viewModelType)}"
 }
 
 fun SerializableInputStep.callMaskedMethodType(): String {

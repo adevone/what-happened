@@ -1,4 +1,4 @@
-package summer.example.recording
+package io.adev.whatHappened.serializable
 
 import io.adev.whatHappened.HappenedEvent
 import kotlinx.serialization.KSerializer

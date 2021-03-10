@@ -1,5 +1,6 @@
 package summer.example
 
+import io.adev.whatHappened.serializable.decode
 import kotlinx.coroutines.Dispatchers
 import summer.example.domain.basket.CoroutinesBasketController
 import summer.example.domain.frameworks.GetAllFrameworkItems
@@ -9,7 +10,6 @@ import summer.example.generated.reproduce1
 import summer.example.presentation.FrameworkDetailsViewModel
 import summer.example.presentation.FrameworksViewModel
 import summer.example.presentation.MainViewModel
-import summer.example.recording.decode
 import kotlin.test.Test
 
 class ReproduceTests {
