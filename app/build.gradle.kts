@@ -53,24 +53,24 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 
-    implementation("com.russhwolf:multiplatform-settings:$multiplatformSettingVersion")
-
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.appcompat:appcompat:$appCompatVersion")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.0")
 
     implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.fragment:fragment-ktx:1.3.0")
+    implementation("androidx.fragment:fragment-ktx:1.3.3")
 
     implementation("com.github.adevone.summer:summer:$summerVersion")
     implementation("com.github.adevone.summer:summer-arch-lifecycle:$summerVersion")
 //    implementation(project(":summer"))
 //    implementation(project(":summer-arch-lifecycle"))
 
+//    implementation("$libraryGroup:what-happened-runtime:$libraryVersion")
+//    kapt("$libraryGroup:what-happened-compiler:$libraryVersion")
     implementation(project(":what-happened-runtime"))
     kapt(project(":what-happened-compiler"))
 

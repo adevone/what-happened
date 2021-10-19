@@ -15,6 +15,7 @@ fun main(args: Array<String>) {
     val kotlinCode = generateKotlinCode(pkg, caseName, steps)
     val outFile = File(outDir, "${pkg.replace(".", "/")}/$caseName.kt")
     if (!outFile.exists()) {
+        outFile.parentFile.mkdirs()
         outFile.createNewFile()
     }
     outFile.writeText(kotlinCode)

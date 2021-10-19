@@ -1,6 +1,18 @@
 plugins {
     id("java-library")
+    id("application")
     id("kotlin")
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+}
+
+application {
+    mainClassName = "io.adev.whatHappened.testGen.MainKt"
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveBaseName.set("app")
+    archiveClassifier.set("")
+    archiveVersion.set("")
 }
 
 java {

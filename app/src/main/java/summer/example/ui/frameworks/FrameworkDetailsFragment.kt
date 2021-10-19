@@ -27,6 +27,7 @@ class FrameworkDetailsFragment : BaseFragment(), FrameworkDetailsView {
         val frameworkString = arguments?.getString(FRAMEWORK_KEY) ?: return
         val framework = Json.decodeFromString(Framework.serializer(), frameworkString)
         viewModel.init(initialFramework = framework)
+        viewModel.init(initialFramework = null)
     }
 
     override var framework: FullFramework? by didSet {

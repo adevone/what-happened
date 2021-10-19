@@ -22,8 +22,8 @@ class FrameworkDetailsViewModel(
         override val notifyAboutName = event { it.notifyAboutName }.perform.onlyWhenAttached()
     }
 
-    fun init(initialFramework: Framework) {
-        viewProxy.framework = initialFramework.toFull()
+    fun init(initialFramework: Framework?) {
+        viewProxy.framework = initialFramework?.toFull()
     }
 
     init {

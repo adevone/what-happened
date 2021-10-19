@@ -5,6 +5,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.serializer
 import kotlin.reflect.full.createType
 
@@ -56,7 +57,10 @@ private fun HappenedEvent.Argument<*>.toSerializable(json: Json): SerializableIn
     val serializer = serializer(this.clazz.createType())
     return SerializableInputStep.Argument(
         name = this.name,
-        value = json.encodeToJsonElement(serializer, value),
+        value = if (value != null)
+            json.encodeToJsonElement(serializer, value)
+        else
+            JsonNull,
         isHidden = this.isHidden,
     )
 }

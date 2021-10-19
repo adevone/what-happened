@@ -1,10 +1,12 @@
 package summer.example.presentation.base
 
 import io.adev.whatHappened.HappenedEvent
+import io.adev.whatHappened.Record
 import summer.example.ServiceLocator
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
 
+@Record
 abstract class BaseViewModel<TView>(
     uiContext: CoroutineContext
 ) : CoroutinesViewModel<TView>(uiContext) {
